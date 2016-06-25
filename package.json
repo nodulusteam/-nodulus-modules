@@ -1,0 +1,14 @@
+{
+  "name": "@nodulus/modules",
+  "version": "1.0.2",
+  "description": "",
+  "main": "modules.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nodulus/data": "^1.0.1"
+  }
+}
