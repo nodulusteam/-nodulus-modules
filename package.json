@@ -1,6 +1,6 @@
 {
   "name": "@nodulus/modules",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "modules.js",
   "scripts": {
@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@nodulus/data": "^1.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^1.8.10"
   }
 }
