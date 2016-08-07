@@ -1,6 +1,6 @@
 {
   "name": "@nodulus/modules",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "this is a core plugin in nodulus.",
   "main": "modules.js",
   "scripts": {
