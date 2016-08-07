@@ -1,12 +1,15 @@
 {
   "name": "@nodulus/modules",
-  "version": "1.0.20",
-  "description": "",
+  "version": "1.0.21",
+  "description": "this is a core plugin in nodulus.",
   "main": "modules.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "keywords": [
+    "nodulus","modules","setup"
+  ],
+  "author": "nodulus",
   "license": "ISC",
   "dependencies": {
     "@nodulus/config": "^1.0.49",
