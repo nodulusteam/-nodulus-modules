@@ -5,9 +5,10 @@
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
+    
      
     "sourceMap": false,
-    "declaration":true
+    "declaration":false
     
   },
 

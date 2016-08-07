@@ -1,6 +1,6 @@
 {
   "name": "@nodulus/modules",
-  "version": "1.0.4",
+  "version": "1.0.20",
   "description": "",
   "main": "modules.js",
   "scripts": {
@@ -9,9 +9,25 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nodulus/data": "^1.0.1"
+    "@nodulus/config": "^1.0.49",
+    "@nodulus/data": "*",
+    "@nodulus/logs": "0.0.17",
+    "npm-keyword": "^4.2.0",
+    "npm-keywordsearch": "^0.1.1",
+    "npm-registry-client": "^7.1.2"
   },
   "devDependencies": {
+    "del": "^2.2.1",
+    "gulp": "^3.9.1",
+    "gulp-bump": "^2.2.0",
+    "gulp-ignore": "^2.0.1",
+    "gulp-publish": "^0.8.7",
+    "gulp-run": "^1.7.1",
+    "gulp-tslint": "^6.0.1",
+    "gulp-typescript": "^2.13.6",
+    "npm-publish": "^0.4.7",
+    "run-sequence": "^1.2.2",
+    "tslint": "^3.13.0",
     "typescript": "^1.8.10"
   }
 }

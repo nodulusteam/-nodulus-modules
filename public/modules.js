@@ -42,6 +42,26 @@ angular.module('nodulus').controller("ModulesController", function ($http, $scop
         ////    return response;
         ////});;
     }
+
+     $scope.checkForUpdates = function (str) {
+
+        return $http.post("/modules/updates").then(function (response) {
+            debugger;
+            
+            return response.data;
+        });
+        //return searchResource.get({ "name": str }, function (data) {
+
+
+        //    return data;
+        //})
+        ////searchResource.query({ "name": str }).then(function (response) {
+        ////    alert(response);
+        ////    return response;
+        ////});;
+    }
+
+
     $scope.Install = function () {
 
         $scope.ModuleLoading = true;
