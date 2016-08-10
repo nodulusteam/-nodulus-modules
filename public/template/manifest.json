@@ -31,7 +31,7 @@
       "ParentId": "00000000-0000-0000-0000-000000000000",
       "Name": "$$module_name$$",
       "label": "$$module_name$$",
-      "Url": "/modules/$$module_name$$/$$module_name$$.html",
+      "Url": "@nodulus/$$module_name$$/$$module_name$$.html",
       "Alias": "$$module_name$$"
     }
   ]

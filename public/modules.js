@@ -17,19 +17,19 @@ angular.module('nodulus').controller("ModulesController", function ($http, $scop
     $scope.LoadAbout = function (pack) {
 
         var module = pack.module;
-        $IDE.ShowLobby({ "label": module.name, _id: module.name + "_about" }, "modules/" + module.name + "/about.html");
+        $IDE.ShowLobby({ "label": module.name, _id: module.name + "_about" },  module.name + "/about.html");
     }
 
 
     $scope.Configure = function (pack) {
 
         var module = pack.module;
-        $IDE.ShowLobby({ "label": module.name, _id: module.name + "_configuration", configModule: pack }, "modules/" + module.name + "/" + module.name + "_configuration.html");
+        $IDE.ShowLobby({ "label": module.name, _id: module.name + "_configuration", configModule: pack },  module.name + "/" + module.name + "_configuration.html");
     }
 
     $scope.getModules = function (str) {
 
-        return $http.get("/modules/listsearch?name=" + escape(str)).then(function (response) {
+        return $http.get("/@nodulus/modules/listsearch?name=" + escape(str)).then(function (response) {
             return response.data;
         });
         //return searchResource.get({ "name": str }, function (data) {
@@ -45,7 +45,7 @@ angular.module('nodulus').controller("ModulesController", function ($http, $scop
 
      $scope.checkForUpdates = function (str) {
 
-        return $http.post("/modules/updates").then(function (response) {
+        return $http.post("@nodulus/modules/updates").then(function (response) {
             debugger;
             
             return response.data;
@@ -65,18 +65,18 @@ angular.module('nodulus').controller("ModulesController", function ($http, $scop
     $scope.Install = function () {
 
         $scope.ModuleLoading = true;
-        var setupRes = $resource("/modules/install");
-        setupRes.save({ name: $scope.Module.Name }, function (data) {
+        var setupRes = $resource("/@nodulus/modules/install");
 
 
+      
 
+        setupRes.save({ name: $scope.Module.name }, function (data) {
             $scope.LoadAbout(data);
-
             $scope.ListModules();
             $TreeMenu.initTreeMenu();
-            $Alerts.add({ type: 'success', msg: 'module: ' + $scope.Module.Name + ' installed', 'icon': 'fa fa-check', autoClose: 1000 * 5 });
+            $Alerts.add({ type: 'success', msg: 'module: ' + $scope.Module.name + ' installed', 'icon': 'fa fa-check', autoClose: 1000 * 5 });
         }, function () {
-            $Alerts.add({ type: 'danger', msg: 'module: ' + $scope.Module.Name + ' not installed', 'icon': 'fa fa-close', autoClose: 1000 * 5 });
+            $Alerts.add({ type: 'danger', msg: 'module: ' + $scope.Module.name + ' not installed', 'icon': 'fa fa-close', autoClose: 1000 * 5 });
             $scope.ModuleLoading = false;
         })
 
@@ -88,11 +88,11 @@ angular.module('nodulus').controller("ModulesController", function ($http, $scop
     $scope.Create = function () {
 
         $scope.ModuleLoading = true;
-        var createRes = $resource("/modules/create");
+        var createRes = $resource("/@nodulus/modules/create");
         createRes.save({ name: $scope.Module.NewName }, function (data) {
 
 
-            var setupRes = $resource("/modules/install");
+            var setupRes = $resource("/@nodulus/modules/install");
             setupRes.save({ name: $scope.Module.NewName }, function (data) {
                 $Alerts.add({ type: 'success', msg: 'module: ' + $scope.Module.NewName + ' installed', 'icon': 'fa fa-check', autoClose: 1000 * 5 });
 
@@ -118,7 +118,7 @@ angular.module('nodulus').controller("ModulesController", function ($http, $scop
     $scope.Pack = function (module) {
 
         $scope.ModuleLoading = true;
-        var setupRes = $resource("/modules/pack");
+        var setupRes = $resource("/@nodulus/modules/pack");
         setupRes.save({ name: module.name }, function (data) {
             $scope.ModuleLoading = false;
             $Alerts.add({ type: 'success', msg: 'module: ' + module.name + ' packed', 'icon': 'fa fa-check', autoClose: 1000 * 5 });
@@ -147,7 +147,7 @@ angular.module('nodulus').controller("ModulesController", function ($http, $scop
         $mdDialog.show(confirm).then(function () {
             $scope.ModuleLoading = true;
 
-            var setupRes = $resource("/modules/uninstall");
+            var setupRes = $resource("/@nodulus/modules/uninstall");
             setupRes.save({ "name": module.name }, function (data) {
 
                 $Alerts.add({ type: 'success', msg: 'module: ' + module.name + ' removed', 'icon': 'fa fa-recycle', autoClose: 1000 * 5 });
@@ -168,7 +168,7 @@ angular.module('nodulus').controller("ModulesController", function ($http, $scop
 
         $scope.ModuleList = [];
         $scope.ModuleLoading = true;
-        var setupRes = $resource("/modules/list");
+        var setupRes = $resource("/@nodulus/modules/list");
         setupRes.query({}, function (data) {
             $scope.ModuleLoading = false;
             $scope.ModuleList = data;

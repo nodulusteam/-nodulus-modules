@@ -10,7 +10,7 @@ angular.module('nodulus_modules', ['ngMaterial', 'nodulus', 'ui.bootstrap'])
             $scope.menu = {
                 id: module.module, 'name': "Modules" , icon: 'fa fa-folder-open', type: 'categories',
             }
-            $scope.subTreeResource = $resource('modules/navigation/', {});
+            $scope.subTreeResource = $resource('@nodulus/modules/navigation/', {});
             $scope.TreeLoading = true;
             $scope.subTreeResource.query({}, function (data) {
 
@@ -31,10 +31,10 @@ angular.module('nodulus_modules', ['ngMaterial', 'nodulus', 'ui.bootstrap'])
 
 
             $scope.AddNew  = function () {
-                $IDE.ShowLobby({ "_id": "modules", "label": "Modules" }, "modules/modules/modules.html");
+                $IDE.ShowLobby({ "_id": "modules", "label": "Modules" }, "@nodulus/modules/modules.html");
             }
         },
-        templateUrl: "modules/modules/nav.html",
+        templateUrl: "@nodulus/modules/nav.html",
         link: function (scope, element, attrs) {
             
             //$compile(element.contents())(scope.$new);

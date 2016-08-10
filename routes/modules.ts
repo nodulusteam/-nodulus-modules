@@ -20,6 +20,12 @@ if (!config.appSettings.modules) {
     config.mergeConfiguration(local_config_template.logs, 'modules');
 }
 
+if (!config.moduleSettings) {
+    var local_modules_template = require('../templates/modules.json');
+    config.moduleSettings = local_modules_template;
+}
+
+
 
 
 var express = require('express');
@@ -58,8 +64,25 @@ var deleteFolderRecursive = (folderpath: string) => {
 
 router.get("/listsearch", (req: any, res: any) => {
     //var glob = require("glob")
-    var arrRes: Array<any> = ['schemas', 'dma', 'scripter', 'cms', 'codulus', 'zipem', 'terminals'];
-    res.json(arrRes);
+
+    var Scrapper = require('../lib/npm.js');
+    var terms = req.query.name;
+    if (terms.length < 3)
+        return res.json({});
+
+
+    new Scrapper(terms).search(function (err: any, results: any) {
+        if (err) {
+            return console.error('Error: %s', err);
+        }
+        res.json(results);
+
+    });
+
+
+
+    //  var arrRes: Array<any> = ['schemas', 'dma', 'scripter', 'cms', 'codulus', 'zipem', 'terminals'];
+
     // fs.readdir(global.nodulsRepo, (err: any, files: Array<string>) => {
     //     var arrRes: Array<any> = [];
     //     if (files) {
@@ -230,8 +253,10 @@ router.post('/uninstall', (req: any, res: any) => {
 
 
 router.post('/updates', (req: any, res: any) => {
-    process.send("update nodulus");
-    res.json({ "status": "ok" });
+    if (process.send)
+        process.send("update nodulus");
+
+    res.json({ "status": process.send ? "ok" : "update service is unavailable" });
 });
 
 

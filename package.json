@@ -1,8 +1,8 @@
 {
   "name": "@nodulus/modules",
-  "version": "1.0.22",
+  "version": "1.0.24",
   "description": "this is a core plugin in nodulus.",
-  "main": "modules.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,9 +21,12 @@
     "@nodulus/config": "^1.0.49",
     "@nodulus/data": "*",
     "@nodulus/logs": "0.0.17",
+    "cheerio": "^0.20.0",
     "npm-keyword": "^4.2.0",
     "npm-keywordsearch": "^0.1.1",
-    "npm-registry-client": "^7.1.2"
+    "npm-registry-client": "^7.1.2",
+    "npm-scrap": "0.0.6",
+    "request": "^2.74.0"
   },
   "devDependencies": {
     "del": "^2.2.1",

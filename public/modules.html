@@ -1,6 +1,35 @@
 ﻿<div ng-controller="ModulesController">
-    <md-progress-linear md-mode='indeterminate'  data-ng-show="ModuleLoading"></md-progress-linear>
-    
+    <md-progress-linear md-mode='indeterminate' data-ng-show="ModuleLoading"></md-progress-linear>
+
+
+    <style>
+        .custom-popup-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            background-color: #f9f9f9;
+        }
+        
+        .custom-popup-wrapper > .message {
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+            color: #868686;
+        }
+        
+        .custom-popup-wrapper > .dropdown-menu {
+            position: static;
+            float: none;
+            display: block;
+            min-width: 160px;
+            background-color: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+    </style>
+
 
 
     <div class="container pull-right" style="width: 50%;">
@@ -11,17 +40,16 @@
                     <div class="list-group-item" ng-repeat="package in ModuleList">
                         <div class="panel panel-primary">
                             <div class="panel-body" ng-click="package.collapsed = !package.collapsed">
-                                <span ng-class="{'fa fa-angle-down': package.collapsed, 'fa fa-angle-right': !package.collapsed}"></span>
-                                {{package.module.name}}
+                                <span ng-class="{'fa fa-angle-down': package.collapsed, 'fa fa-angle-right': !package.collapsed}"></span>                                {{package.module.name}}
                             </div>
                             <div class="panel-footer" ng-show="package.collapsed">
                                 <div class="col-md-6 col-lg-6">
                                     <a class="link" ng-click="LoadAbout(package)">{{"about"| translate}} {{package.module.name}}</a>
                                 </div>
                                 <div class="col-md-6 col-lg-6">
-                                    <span class="btn btn-sm" ng-class="{'btn-danger': package.state!='locked',   disabled: package.state=='locked'}" ng-click="UnInstall(package.module)"><span class="fa fa-recycle"></span> {{"Delete"| translate}} </span>
-                                    <span class="btn btn-sm btn-info" ng-click="Pack(package.module)"><span class="fa fa-file-archive-o"></span> {{"Pack"| translate}}</span>
-                                    <span class="btn btn-sm btn-warning"  ng-class="{disabled: package.state=='locked'}"><span class="fa fa-cog"></span> {{"Configure"| translate}} </span>
+                                    <span class="btn btn-sm" ng-class="{'btn-danger': package.state!='locked',   disabled: package.state=='locked'}" ng-click="UnInstall(package.module)"><span class="fa fa-recycle"></span>                                    {{"Delete"| translate}} </span>
+                                    <span class="btn btn-sm btn-info" ng-click="Pack(package.module)"><span class="fa fa-file-archive-o"></span>                                    {{"Pack"| translate}}</span>
+                                    <span class="btn btn-sm btn-warning" ng-class="{disabled: package.state=='locked'}"><span class="fa fa-cog"></span>                                    {{"Configure"| translate}} </span>
                                 </div>
                                 <div class="clear"></div>
                             </div>
@@ -47,8 +75,9 @@
                         <div ng-show="noResults">
                             <i class="glyphicon glyphicon-remove"></i> No Results Found
                         </div>
-                        <input type="text" ng-model="Module.Name" class="form-control" uib-typeahead="file for file in getModules($viewValue)"
-                               typeahead-loading="loadingLocations" typeahead-editable="false" typeahead-show-hint="true" typeahead-no-results="noResults">
+                        <input type="text" ng-model="Module" class="form-control" uib-typeahead="file as file.name for file in getModules($viewValue)" typeahead-loading="loadingLocations"
+                            typeahead-popup-template-url="modulesearch.html" typeahead-editable="false" typeahead-show-hint="true"
+                            typeahead-no-results="noResults">
                         <span class="input-group-btn">
                             <a class="btn btn-primary cursor" ng-click="Install()">{{"install" | translate}}</a>
                         </span>
@@ -78,17 +107,55 @@
     </div>
 
 
-     <div class="container pull-left" style="width: 50%;">
+    <div class="container pull-left" style="width: 50%;">
         <div class="panel panel-success">
             <div class="panel-heading">{{"Check for updates" | translate}}</div>
             <div class="panel-body">
                 <div class="form-group">
-                      <a class="btn btn-primary cursor" ng-click="checkForUpdates()">{{"Check" | translate}}</a>
+                    <a class="btn btn-primary cursor" ng-click="checkForUpdates()">{{"Check" | translate}}</a>
                     <abbr>click to check for updates</abbr>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <script type="text/ng-template" id="modulerow.html">
+
+<a href class="pull-left"
+   tabindex="-1"
+   ng-bind-html="match.model.name"
+   ng-attr-title="{{match.model.name}}"></a>
+
+
+<p ng-bind-html="match.model.description" class="pull-left"></p>
+<abbr ng-bind-html="match.model.version" class="pull-right"></abbr>
+        
+   </script>
+
+
+    <script type="text/ng-template" id="modulesearch.html">
+  <div class="custom-popup-wrapper"
+     ng-style="{top: position().top+'px', left: position().left+'px'}"
+     style="display: block;"
+     ng-show="isOpen() && !moveInProgress"
+     aria-hidden="{{!isOpen()}}">
+    <!--<p class="message">select location from drop down.</p>-->
+ 
+    <ul class="dropdown-menu" role="listbox">
+      <li class="uib-typeahead-match" ng-repeat="match  in matches track by $index" ng-class="{active: isActive($index) }"
+        ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+
+
+        <div uib-typeahead-match index="$index" match="match" query="query" template-url="'modulerow.html'">
+
+
+
+        </div>
+      </li>
+    </ul>
+  </div>
+</script>
 
 
 </div>

@@ -165,7 +165,7 @@ export class ModuleUtility {
             child: any;
 
 
-        child = exec('npm install ' + '@nodulus/' + module_name + ' --save',
+        child = exec('npm install '   + module_name + ' --save',
             function (error: any, stdout: any, stderr: any) {
 
                 //callback(stderr, stdout);
@@ -175,13 +175,13 @@ export class ModuleUtility {
                     console.log('exec error: ' + error);
                 }
 
-                app.use('/modules/' + module_name, express.static(path.join(process.cwd(), 'node_modules', '@nodulus', module_name, 'public')));
+                app.use('/' + module_name, express.static(path.join(process.cwd(), 'node_modules',  module_name, 'public')));
 
 
                 var baseFolder = path.join(appRoot, consts.MODULES_PATH, module_name);
 
 
-                var manifest_file = require('@nodulus/' + module_name + '/' + consts.MANIFEST_NAME);
+                var manifest_file = require(module_name + '/' + consts.MANIFEST_NAME);
                 // read a zip file      
 
                 //register the module to the modules.json file
@@ -251,7 +251,7 @@ export class ModuleUtility {
             child: any;
 
 
-        child = exec('npm uninstall ' + '@nodulus/' + module_name + ' --save',
+        child = exec('npm uninstall ' +   module_name + ' --save',
             function (error: any, stdout: any, stderr: any) {
 
                 //callback(stderr, stdout);
