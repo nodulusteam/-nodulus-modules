@@ -20,12 +20,12 @@
   "dependencies": [ "nodulus_modules" ],
   "routes": [
     {
-      "route": "/modules",
+      "route": "/",
       "path": "modules.js"
     }
   ],
   "module": {
-    "name": "modules"
+    "name": "@nodulus/modules"
 
   },
   "npm": {
