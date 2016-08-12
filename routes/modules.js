@@ -91,7 +91,15 @@ router.get("/list", function (req, res) {
     new ModuleUtility().list(function (data) {
         var arr = [];
         for (var x in data) {
-            arr.push(data[x]);
+            var version = 0;
+            try {
+                version = require(x + '/package.json').version;
+            }
+            catch (e) {
+                version = 0;
+            }
+            var package = { name: x, version: version, state: data[x].state };
+            arr.push(package);
         }
         res.json(arr);
     });
