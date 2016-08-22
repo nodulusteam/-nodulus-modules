@@ -8,9 +8,8 @@ var mkdirp = require('mkdirp');
 var consts = require('@nodulus/config').consts;
 var config = require('@nodulus/config').config;
 var dal = require('@nodulus/data');
-var express = require('express');
-var app = express();
-
+var app = require("@nodulus/core");
+ 
 
 
 // var configPath = path.join(path.resolve('config'));
@@ -165,7 +164,7 @@ export class ModuleUtility {
             child: any;
 
 
-        child = exec('npm install '   + module_name + ' --save',
+        child = exec('npm install ' + module_name + ' --save',
             function (error: any, stdout: any, stderr: any) {
 
                 //callback(stderr, stdout);
@@ -175,13 +174,19 @@ export class ModuleUtility {
                     console.log('exec error: ' + error);
                 }
 
-                app.use('/' + module_name, express.static(path.join(process.cwd(), 'node_modules',  module_name, 'public')));
+                app.use('/' + module_name, app.static(path.join(process.cwd(), 'node_modules', module_name, 'public')));
+                 
+
+                var manifest_file = require(module_name + '/' + consts.MANIFEST_NAME);
+
+
+
 
 
                 var baseFolder = path.join(appRoot, consts.MODULES_PATH, module_name);
 
 
-                var manifest_file = require(module_name + '/' + consts.MANIFEST_NAME);
+
                 // read a zip file      
 
                 //register the module to the modules.json file
@@ -194,6 +199,19 @@ export class ModuleUtility {
                     modules_file[module_name] = {}
                 }
 
+
+                
+                if (manifest_file.routes !== undefined) {
+                    for (var x = 0; x < manifest_file.routes.length; x++) {
+                        try {
+                            var pathRoute = module_name + '/routes/' + manifest_file.routes[x].path;
+                            app.use('/' + module_name  + manifest_file.routes[x].route, require(pathRoute));
+                        }
+                        catch (error) {
+                            console.error(error);
+                        }
+                    }
+                }
 
                 //merge the manifest into the modules.json file
                 if (manifest_file === null)
@@ -216,8 +234,8 @@ export class ModuleUtility {
 
                 if (manifest_file.npm !== undefined) {
                     var arr: Array<any> = [];
-                    for (var x in manifest_file.npm) {
-                        arr.push({ name: x, ver: manifest_file.npm[x] });
+                    for (var f in manifest_file.npm) {
+                        arr.push({ name: f, ver: manifest_file.npm[f] });
                     }
                     //install npm dependencies
                     var async = require("async");
@@ -251,7 +269,7 @@ export class ModuleUtility {
             child: any;
 
 
-        child = exec('npm uninstall ' +   module_name + ' --save',
+        child = exec('npm uninstall ' + module_name + ' --save',
             function (error: any, stdout: any, stderr: any) {
 
                 //callback(stderr, stdout);

@@ -1,6 +1,6 @@
 {
   "name": "@nodulus/modules",
-  "version": "1.0.27",
+  "version": "1.0.29",
   "description": "this is a core plugin in nodulus.",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
     "@nodulus/data": "*",
     "@nodulus/logs": "0.0.17",
     "cheerio": "^0.20.0",
+    "jszip": "^3.1.1",
     "npm-keyword": "^4.2.0",
     "npm-keywordsearch": "^0.1.1",
     "npm-registry-client": "^7.1.2",
