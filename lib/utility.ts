@@ -116,7 +116,7 @@ export class ModuleUtility {
             }
 
 
-            //merge the manifest into the modules.json file
+            //merge the manifest into the  file
             if (manifest_file === null)
                 callback("invalid json, try using ascii file");
 
@@ -189,7 +189,7 @@ export class ModuleUtility {
 
                 // read a zip file      
 
-                //register the module to the modules.json file
+                //register the module to the modules.js file
                 // fs.ensureFileSync(modules_configuration_path);
                 var modules_file: any = {};
 
@@ -213,7 +213,7 @@ export class ModuleUtility {
                     }
                 }
 
-                //merge the manifest into the modules.json file
+                //merge the manifest into the modules.js file
                 if (manifest_file === null)
                     callback("invalid json, try using ascii file");
 
@@ -303,7 +303,7 @@ export class ModuleUtility {
 
         // //     // try {
         // //     //     var manifest_file = fs.readJsonSync(path.join(global.clientAppRoot, "modules", module_name, consts.MANIFEST_NAME), { throws: false });
-        // //     //     //merge the manifest into the modules.json file
+        // //     //     //merge the manifest into the modules.js file
         // //     //     if (manifest_file === null)
         // //     //         callback("invalid json, try using ascii file");
         // //     //     dal.connect((err: any, db: any) => {
@@ -475,7 +475,7 @@ export class ModuleUtility {
     pack(module_name: string, callback: Function) {
         var baseFolder = path.join(global.clientAppRoot, "modules", module_name);
         var manifest_file = fs.readJsonSync(path.join(baseFolder, consts.MANIFEST_NAME), { throws: false });
-        //merge the manifest into the modules.json file
+        //merge the manifest into the modules.js file
         if (manifest_file === null)
             callback("invalid json, try using ascii file");
 

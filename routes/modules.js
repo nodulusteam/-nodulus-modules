@@ -9,18 +9,17 @@
 /// <reference path="../typings/main.d.ts" />
 var dal = require('@nodulus/data');
 var consts = require('@nodulus/config').consts;
-var config = require('@nodulus/config').config;
+var config = require('@nodulus/config');
 if (!config.appSettings.modules) {
-    var local_config_template = require('../templates/config.json');
+    var local_config_template = require('../templates/config.js');
     config.mergeConfiguration(local_config_template.logs, 'modules');
 }
 if (!config.moduleSettings) {
-    var local_modules_template = require('../templates/modules.json');
+    var local_modules_template = require('../templates/modules.js');
     config.moduleSettings = local_modules_template;
 }
-var express = require('express');
-var app = express();
-var router = express.Router();
+var app = require('@nodulus/core');
+var router = app.Router();
 var util = require('util');
 var path = require('path');
 var fs = require("fs-extra");

@@ -10,21 +10,14 @@
 
 
 angular.module('nodulus').controller("ModulesController", function ($http, $scope, $Alerts, $IDE, $translate, $resource, $Language, $mdDialog, $TreeMenu) {
-
-
-
-
     $scope.LoadAbout = function (pack) {
-
-        var module = pack.module;
-        $IDE.ShowLobby({ "label": module.name, _id: module.name + "_about" },  module.name + "/about.html");
+        $IDE.ShowLobby({ "label": pack.name, _id: pack.name + "_about" }, pack.name + "/about.html");
     }
-
 
     $scope.Configure = function (pack) {
 
         var module = pack.module;
-        $IDE.ShowLobby({ "label": module.name, _id: module.name + "_configuration", configModule: pack },  module.name + "/" + module.name + "_configuration.html");
+        $IDE.ShowLobby({ "label": module.name, _id: module.name + "_configuration", configModule: pack }, module.name + "/" + module.name + "_configuration.html");
     }
 
     $scope.getModules = function (str) {
@@ -43,11 +36,11 @@ angular.module('nodulus').controller("ModulesController", function ($http, $scop
         ////});;
     }
 
-     $scope.checkForUpdates = function (str) {
+    $scope.checkForUpdates = function (str) {
 
         return $http.post("@nodulus/modules/updates").then(function (response) {
             debugger;
-            
+
             return response.data;
         });
         //return searchResource.get({ "name": str }, function (data) {
@@ -68,7 +61,7 @@ angular.module('nodulus').controller("ModulesController", function ($http, $scop
         var setupRes = $resource("/@nodulus/modules/install");
 
 
-      
+
 
         setupRes.save({ name: $scope.Module.name }, function (data) {
             $scope.LoadAbout(data);

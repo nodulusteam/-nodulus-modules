@@ -8,7 +8,7 @@
  */
   
   
-var express = require('express');
+var express = require('@nodulus/core');
 var router = express.Router();
 var util = require('util');
 var fs = require('fs');
