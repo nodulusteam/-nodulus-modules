@@ -4,7 +4,7 @@
   "description": "this is a core plugin in nodulus.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests --recursive"
   },
   "keywords": [
     "nodulus",
@@ -18,18 +18,21 @@
   "author": "nodulus",
   "license": "ISC",
   "dependencies": {
-    "@nodulus/config": "^1.0.49",
-    "@nodulus/data": "*",
-    "@nodulus/logs": "0.0.17",
+    "@nodulus/config": "^1.0.69",
+    "@nodulus/data": "^1.0.28",
+    "@nodulus/logs": "^0.0.17",
     "cheerio": "^0.20.0",
+    "gulp-tslint": "^6.1.2",
+    "gulp-typescript": "^2.14.1",
     "jszip": "^3.1.1",
     "npm-keyword": "^4.2.0",
     "npm-keywordsearch": "^0.1.1",
     "npm-registry-client": "^7.1.2",
     "npm-scrap": "0.0.6",
-    "request": "^2.74.0"
+    "request": "^2.75.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "del": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.2.0",
@@ -38,7 +41,7 @@
     "gulp-run": "^1.7.1",
     "gulp-tslint": "^6.0.1",
     "gulp-typescript": "^2.13.6",
-    "npm-publish": "^0.4.7",
+    "mocha": "^2.5.3",
     "run-sequence": "^1.2.2",
     "tslint": "^3.13.0",
     "typescript": "^1.8.10"
