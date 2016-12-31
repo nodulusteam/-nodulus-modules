@@ -28,10 +28,8 @@ if (!config.moduleSettings) {
 
 
 
-var app = require('@nodulus/core');
- 
-
-var router = app.Router();
+var express = require("@nodulus/core");
+var router = express.Router();
 var util = require('util');
 var path = require('path');
 

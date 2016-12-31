@@ -1,6 +1,6 @@
 {
   "name": "@nodulus/modules",
-  "version": "1.0.35",
+  "version": "1.0.38",
   "description": "this is a core plugin in nodulus.",
   "main": "index.js",
   "scripts": {
@@ -18,20 +18,21 @@
   "author": "nodulus",
   "license": "ISC",
   "dependencies": {
-    "@nodulus/config": "^1.0.69",
-    "@nodulus/data": "^1.0.28",
-    "@nodulus/logs": "^0.0.17",
     "cheerio": "^0.20.0",
-    "gulp-tslint": "^6.1.2",
-    "gulp-typescript": "^2.14.1",
     "jszip": "^3.1.1",
+    "moment": "^2.15.1",
     "npm-keyword": "^4.2.0",
     "npm-keywordsearch": "^0.1.1",
     "npm-registry-client": "^7.1.2",
     "npm-scrap": "0.0.6",
+    "ramda": "^0.23.0",
     "request": "^2.75.0"
   },
   "devDependencies": {
+    "@nodulus/config": "*",
+    "@nodulus/core": "*",
+    "@nodulus/data": "*",
+    "@nodulus/logs": "*",
     "chai": "^3.5.0",
     "del": "^2.2.1",
     "gulp": "^3.9.1",
@@ -40,10 +41,10 @@
     "gulp-publish": "^0.8.7",
     "gulp-run": "^1.7.1",
     "gulp-tslint": "^6.0.1",
-    "gulp-typescript": "^2.13.6",
+    "gulp-typescript": "^3.0.2",
     "mocha": "^2.5.3",
     "run-sequence": "^1.2.2",
     "tslint": "^3.13.0",
-    "typescript": "^1.8.10"
+    "typescript": "^2.0.3"
   }
 }

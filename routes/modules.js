@@ -18,8 +18,8 @@ if (!config.moduleSettings) {
     var local_modules_template = require('../templates/modules.js');
     config.moduleSettings = local_modules_template;
 }
-var app = require('@nodulus/core');
-var router = app.Router();
+var express = require("@nodulus/core");
+var router = express.Router();
 var util = require('util');
 var path = require('path');
 var fs = require("fs-extra");

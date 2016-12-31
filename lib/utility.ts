@@ -6,10 +6,10 @@ var JSZip = require("jszip");
 var moment = require('moment');
 var mkdirp = require('mkdirp');
 var consts = require('@nodulus/config').consts;
-var config = require('@nodulus/config').config;
+var config = require('@nodulus/config');
 var dal = require('@nodulus/data');
 var app = require("@nodulus/core");
- 
+
 
 
 // var configPath = path.join(path.resolve('config'));
@@ -173,39 +173,25 @@ export class ModuleUtility {
                 if (error !== null) {
                     console.log('exec error: ' + error);
                 }
+                var basePath = path.join(process.cwd(), 'node_modules', module_name);
+                app.use('/' + module_name, app.static(path.join(basePath, 'public')));
+                var manifest_file = require(path.join(basePath, consts.MANIFEST_NAME));
 
-                app.use('/' + module_name, app.static(path.join(process.cwd(), 'node_modules', module_name, 'public')));
-                 
-
-                var manifest_file = require(module_name + '/' + consts.MANIFEST_NAME);
-
-
-
-
-
-                var baseFolder = path.join(appRoot, consts.MODULES_PATH, module_name);
-
-
-
-                // read a zip file      
-
-                //register the module to the modules.js file
-                // fs.ensureFileSync(modules_configuration_path);
                 var modules_file: any = {};
 
-                modules_file = config.modulesSettings;//  fs.readJsonSync(modules_configuration_path);
+                modules_file = config.modulesSettings;
 
                 if (modules_file[module_name] === undefined) {
                     modules_file[module_name] = {}
                 }
 
 
-                
+
                 if (manifest_file.routes !== undefined) {
                     for (var x = 0; x < manifest_file.routes.length; x++) {
                         try {
-                            var pathRoute = module_name + '/routes/' + manifest_file.routes[x].path;
-                            app.use('/' + module_name  + manifest_file.routes[x].route, require(pathRoute));
+                            var pathRoute = path.join(basePath, 'routes', manifest_file.routes[x].path);
+                            app.use('/' + module_name + manifest_file.routes[x].route, require(pathRoute));
                         }
                         catch (error) {
                             console.error(error);
